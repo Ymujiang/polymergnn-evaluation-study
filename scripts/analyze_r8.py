@@ -9,7 +9,12 @@
 - Wilcoxon 符号秩检验（精确法，双侧）
 - Holm-Bonferroni 跨 3 任务校正（对 raw Wilcoxon p）
 
-诊断解释不由本统计脚本验证；本脚本只分析已有标量记录，不执行模型推理。
+诊断说明（joint-baseline 异常）：
+joint baseline 臂 test_loss 均值 18.77（远超历史 validation_loss 量级 0.08-0.17），
+经逐样本重算证实为真实模型失败，非脚本 bug：用 best checkpoint 跑同一批 test 样本，
+Tg 预测中位误差从 194.9K 降至 8.4K。该现象与 IDEA-001 修复的
+joint_test.py glycol 分支 self.Asage→self.Gsage 拷贝粘贴 bug 完全吻合
+（baseline 的 glycol 编码器权重从未被训练）。详见 experiment_ledger.md §10.3。
 """
 import json
 import numpy as np

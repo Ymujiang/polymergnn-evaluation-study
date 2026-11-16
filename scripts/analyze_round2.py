@@ -62,7 +62,12 @@ m=3
 print(chr(10)+'Holm-Bonferroni across 3 tasks:')
 for nm,key in (('raw Wilcoxon','wilcoxon_p'),('selection-adjusted','p_selection_adj')):
     print('  ['+nm+']')
+    holm_vals=[]
     for i,(p,t) in enumerate(sorted((res[t][key],t) for t in res)):
-        print('    %-6s p=%.4f  holm=%.4f  %s'%(t,p,min(1,p*(m-i)),'SIG' if min(1,p*(m-i))<0.05 else 'ns'))
+        holm_vals.append((t,p,min(1,p*(m-i))))
+    running=0.0
+    for t,p,adj in holm_vals:
+        running=max(running,adj)
+        print('    %-6s p=%.4f  holm=%.4f  %s'%(t,p,running,'SIG' if running<0.05 else 'ns'))
 json.dump(res,open('evidence/round2_paired_stats.json','w'),indent=2)
 print(chr(10)+'saved evidence/round2_paired_stats.json')

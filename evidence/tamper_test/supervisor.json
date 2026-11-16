@@ -1,0 +1,23 @@
+{
+  "command": [
+    "/home/ymujdb/PolymerGNN-project/.envs/polymergnn/bin/python",
+    "/home/ymujdb/PolymerGNN-project/scripts/bounded_train.py",
+    "--task",
+    "joint",
+    "--epochs",
+    "50",
+    "--max-updates",
+    "2000",
+    "--timeout-seconds",
+    "60",
+    "--batch-size",
+    "8",
+    "--learning-rate",
+    "0.0005",
+    "--output",
+    "evidence/timing_probe_joint",
+    "--worker"
+  ],
+  "exit_code": 0,
+  "hard_timeout_seconds": 60.0
+}

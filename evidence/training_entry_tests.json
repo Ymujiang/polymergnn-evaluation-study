@@ -1,0 +1,249 @@
+{
+  "status": "PASS",
+  "plans": [
+    {
+      "track": "faithful-legacy",
+      "task": "joint",
+      "mode": "PLAN_ONLY",
+      "training_enabled": false,
+      "optimizer": "AdamW",
+      "max_epochs": 1,
+      "max_optimizer_updates": 2,
+      "timeout_seconds": 180,
+      "steps_per_epoch": 64,
+      "batch_semantics": "64 separately optimized records; not one minibatch step",
+      "entry": "legacy external watchdog",
+      "stop_on": [
+        "nonfinite prediction",
+        "nonfinite loss",
+        "nonfinite gradient",
+        "nonfinite parameter",
+        "update cap",
+        "epoch cap",
+        "wall-clock cap"
+      ],
+      "completion": "budget exit is diagnostic/truncated, never convergence or reproduction",
+      "blockers": [
+        "joint original while True; do not invoke original trainer"
+      ],
+      "formal_run_authorized": false
+    },
+    {
+      "track": "faithful-legacy",
+      "task": "IV",
+      "mode": "PLAN_ONLY",
+      "training_enabled": false,
+      "optimizer": "AdamW",
+      "max_epochs": 1,
+      "max_optimizer_updates": 2,
+      "timeout_seconds": 180,
+      "steps_per_epoch": 64,
+      "batch_semantics": "64 separately optimized records; not one minibatch step",
+      "entry": "legacy external watchdog",
+      "stop_on": [
+        "nonfinite prediction",
+        "nonfinite loss",
+        "nonfinite gradient",
+        "nonfinite parameter",
+        "update cap",
+        "epoch cap",
+        "wall-clock cap"
+      ],
+      "completion": "budget exit is diagnostic/truncated, never convergence or reproduction",
+      "blockers": [],
+      "formal_run_authorized": false
+    },
+    {
+      "track": "faithful-legacy",
+      "task": "Tg",
+      "mode": "PLAN_ONLY",
+      "training_enabled": false,
+      "optimizer": "AdamW",
+      "max_epochs": 1,
+      "max_optimizer_updates": 2,
+      "timeout_seconds": 180,
+      "steps_per_epoch": 64,
+      "batch_semantics": "64 separately optimized records; not one minibatch step",
+      "entry": "legacy external watchdog",
+      "stop_on": [
+        "nonfinite prediction",
+        "nonfinite loss",
+        "nonfinite gradient",
+        "nonfinite parameter",
+        "update cap",
+        "epoch cap",
+        "wall-clock cap"
+      ],
+      "completion": "budget exit is diagnostic/truncated, never convergence or reproduction",
+      "blockers": [
+        "original Tg exp overflow"
+      ],
+      "formal_run_authorized": false
+    },
+    {
+      "track": "paper-intended",
+      "task": "joint",
+      "mode": "PLAN_ONLY",
+      "training_enabled": false,
+      "optimizer": "Adam",
+      "max_epochs": 1,
+      "max_optimizer_updates": 2,
+      "timeout_seconds": 180,
+      "steps_per_epoch": 64,
+      "batch_semantics": "64 separately optimized records; not one minibatch step",
+      "entry": "separate bounded single-split trainer (implementation pending)",
+      "stop_on": [
+        "nonfinite prediction",
+        "nonfinite loss",
+        "nonfinite gradient",
+        "nonfinite parameter",
+        "update cap",
+        "epoch cap",
+        "wall-clock cap"
+      ],
+      "completion": "budget exit is diagnostic/truncated, never convergence or reproduction",
+      "blockers": [
+        "paper conflicts: gamma, units, preprocessing, encoder, checkpoint"
+      ],
+      "formal_run_authorized": false
+    },
+    {
+      "track": "paper-intended",
+      "task": "IV",
+      "mode": "PLAN_ONLY",
+      "training_enabled": false,
+      "optimizer": "Adam",
+      "max_epochs": 1,
+      "max_optimizer_updates": 2,
+      "timeout_seconds": 180,
+      "steps_per_epoch": 64,
+      "batch_semantics": "64 separately optimized records; not one minibatch step",
+      "entry": "separate bounded single-split trainer (implementation pending)",
+      "stop_on": [
+        "nonfinite prediction",
+        "nonfinite loss",
+        "nonfinite gradient",
+        "nonfinite parameter",
+        "update cap",
+        "epoch cap",
+        "wall-clock cap"
+      ],
+      "completion": "budget exit is diagnostic/truncated, never convergence or reproduction",
+      "blockers": [
+        "paper conflicts: gamma, units, preprocessing, encoder, checkpoint"
+      ],
+      "formal_run_authorized": false
+    },
+    {
+      "track": "paper-intended",
+      "task": "Tg",
+      "mode": "PLAN_ONLY",
+      "training_enabled": false,
+      "optimizer": "Adam",
+      "max_epochs": 1,
+      "max_optimizer_updates": 2,
+      "timeout_seconds": 180,
+      "steps_per_epoch": 64,
+      "batch_semantics": "64 separately optimized records; not one minibatch step",
+      "entry": "separate bounded single-split trainer (implementation pending)",
+      "stop_on": [
+        "nonfinite prediction",
+        "nonfinite loss",
+        "nonfinite gradient",
+        "nonfinite parameter",
+        "update cap",
+        "epoch cap",
+        "wall-clock cap"
+      ],
+      "completion": "budget exit is diagnostic/truncated, never convergence or reproduction",
+      "blockers": [
+        "original Tg exp overflow",
+        "paper conflicts: gamma, units, preprocessing, encoder, checkpoint"
+      ],
+      "formal_run_authorized": false
+    },
+    {
+      "track": "corrected-evaluation",
+      "task": "joint",
+      "mode": "PLAN_ONLY",
+      "training_enabled": false,
+      "optimizer": "UNRESOLVED: freeze parent protocol",
+      "max_epochs": 1,
+      "max_optimizer_updates": 2,
+      "timeout_seconds": 180,
+      "steps_per_epoch": 64,
+      "batch_semantics": "64 separately optimized records; not one minibatch step",
+      "entry": "separate bounded single-split trainer (implementation pending)",
+      "stop_on": [
+        "nonfinite prediction",
+        "nonfinite loss",
+        "nonfinite gradient",
+        "nonfinite parameter",
+        "update cap",
+        "epoch cap",
+        "wall-clock cap"
+      ],
+      "completion": "budget exit is diagnostic/truncated, never convergence or reproduction",
+      "blockers": [
+        "train-only imputer/scaler, frozen validation IDs, parent configuration and evaluator tests required"
+      ],
+      "formal_run_authorized": false
+    },
+    {
+      "track": "corrected-evaluation",
+      "task": "IV",
+      "mode": "PLAN_ONLY",
+      "training_enabled": false,
+      "optimizer": "UNRESOLVED: freeze parent protocol",
+      "max_epochs": 1,
+      "max_optimizer_updates": 2,
+      "timeout_seconds": 180,
+      "steps_per_epoch": 64,
+      "batch_semantics": "64 separately optimized records; not one minibatch step",
+      "entry": "separate bounded single-split trainer (implementation pending)",
+      "stop_on": [
+        "nonfinite prediction",
+        "nonfinite loss",
+        "nonfinite gradient",
+        "nonfinite parameter",
+        "update cap",
+        "epoch cap",
+        "wall-clock cap"
+      ],
+      "completion": "budget exit is diagnostic/truncated, never convergence or reproduction",
+      "blockers": [
+        "train-only imputer/scaler, frozen validation IDs, parent configuration and evaluator tests required"
+      ],
+      "formal_run_authorized": false
+    },
+    {
+      "track": "corrected-evaluation",
+      "task": "Tg",
+      "mode": "PLAN_ONLY",
+      "training_enabled": false,
+      "optimizer": "UNRESOLVED: freeze parent protocol",
+      "max_epochs": 1,
+      "max_optimizer_updates": 2,
+      "timeout_seconds": 180,
+      "steps_per_epoch": 64,
+      "batch_semantics": "64 separately optimized records; not one minibatch step",
+      "entry": "separate bounded single-split trainer (implementation pending)",
+      "stop_on": [
+        "nonfinite prediction",
+        "nonfinite loss",
+        "nonfinite gradient",
+        "nonfinite parameter",
+        "update cap",
+        "epoch cap",
+        "wall-clock cap"
+      ],
+      "completion": "budget exit is diagnostic/truncated, never convergence or reproduction",
+      "blockers": [
+        "original Tg exp overflow",
+        "train-only imputer/scaler, frozen validation IDs, parent configuration and evaluator tests required"
+      ],
+      "formal_run_authorized": false
+    }
+  ],
+  "invalid_budget_cases_rejected": 4
+}

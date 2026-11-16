@@ -1,0 +1,115 @@
+--- a/polymerlearn/models/gnn/ablation_models/iv_mono.py
++++ b/polymerlearn/models/gnn/ablation_models/iv_mono.py
+@@ -1,7 +1,13 @@
+ import torch
+ import torch_geometric as pyg
+ from torch_geometric.nn import SAGEConv, GCNConv, GATConv, Sequential, global_max_pool, global_mean_pool, BatchNorm
+-from torch_geometric.nn import SAGPooling, Set2Set, GlobalAttention
++from torch_geometric.nn import SAGPooling as _SAGPooling
++
++class SAGPooling(_SAGPooling):
++    """Bridge PyG Sequential positional mapping to batch keyword."""
++    def forward(self, x, edge_index, batch):
++        return super().forward(x, edge_index, batch=batch)
++
+ 
+ class PolymerGNN_IVMono(torch.nn.Module):
+     def __init__(self, input_feat, hidden_channels, num_additional = 0):
+@@ -15,7 +21,7 @@
+             (SAGEConv(hidden_channels, hidden_channels, aggr = 'max'), 'x, edge_index -> x'),
+             BatchNorm(hidden_channels, track_running_stats=False),
+             torch.nn.PReLU(),
+-            (SAGPooling(hidden_channels), 'x, edge_index, batch=batch -> x'),
++            (SAGPooling(hidden_channels), 'x, edge_index, batch -> x'),
+         ])
+ 
+         self.fc1 = torch.nn.Linear(hidden_channels * 2 + num_additional, hidden_channels)
+--- a/polymerlearn/models/gnn/joint_test.py
++++ b/polymerlearn/models/gnn/joint_test.py
+@@ -1,6 +1,12 @@
+ import torch
+ from torch_geometric.nn import SAGEConv, GATConv, Sequential, BatchNorm
+-from torch_geometric.nn import SAGPooling
++from torch_geometric.nn import SAGPooling as _SAGPooling
++
++class SAGPooling(_SAGPooling):
++    """Bridge PyG Sequential positional mapping to batch keyword."""
++    def forward(self, x, edge_index, batch):
++        return super().forward(x, edge_index, batch=batch)
++
+ 
+ class PolymerGNN_Joint(torch.nn.Module):
+     def __init__(self, input_feat, hidden_channels, num_additional = 0):
+@@ -14,7 +20,7 @@
+             (SAGEConv(hidden_channels, hidden_channels, aggr = 'max'), 'x, edge_index -> x'),
+             BatchNorm(hidden_channels, track_running_stats=False),
+             torch.nn.PReLU(),
+-            (SAGPooling(hidden_channels), 'x, edge_index, batch=batch -> x'),
++            (SAGPooling(hidden_channels), 'x, edge_index, batch -> x'),
+         ])
+ 
+         self.Gsage = Sequential('x, edge_index, batch', [
+@@ -24,7 +30,7 @@
+             (SAGEConv(hidden_channels, hidden_channels, aggr = 'max'), 'x, edge_index -> x'),
+             BatchNorm(hidden_channels, track_running_stats=False),
+             torch.nn.PReLU(),
+-            (SAGPooling(hidden_channels), 'x, edge_index, batch=batch -> x'),
++            (SAGPooling(hidden_channels), 'x, edge_index, batch -> x'),
+         ])
+ 
+         self.fc1 = torch.nn.Linear(hidden_channels * 2 + num_additional, hidden_channels)
+@@ -41,11 +47,18 @@
+             torch.nn.Tanh(),
+         )
+ 
++        torch.nn.init.kaiming_normal_(self.fc1.weight, nonlinearity='leaky_relu')
++        torch.nn.init.zeros_(self.fc1.bias)
++        torch.nn.init.kaiming_normal_(self.fc2[0].weight, nonlinearity='leaky_relu')
++        torch.nn.init.zeros_(self.fc2[0].bias)
++        torch.nn.init.xavier_uniform_(self.mult_factor[0].weight)
++        torch.nn.init.zeros_(self.mult_factor[0].bias)
++
+     def forward(self, Abatch: torch.Tensor, Gbatch: torch.Tensor, add_features: torch.Tensor):
+         # Decompose X into acid and glycol
+ 
+         Aembeddings = self.Asage(Abatch.x, Abatch.edge_index, Abatch.batch)[0]
+-        Gembeddings = self.Asage(Gbatch.x, Gbatch.edge_index, Gbatch.batch)[0]
++        Gembeddings = self.Gsage(Gbatch.x, Gbatch.edge_index, Gbatch.batch)[0]
+         
+         Aembed, _ = torch.max(Aembeddings, dim=0)
+         Gembed, _ = torch.max(Gembeddings, dim=0)
+--- a/polymerlearn/models/gnn/tg.py
++++ b/polymerlearn/models/gnn/tg.py
+@@ -1,7 +1,13 @@
+ import torch
+ import torch_geometric as pyg
+ from torch_geometric.nn import SAGEConv, GCNConv, GATConv, Sequential, global_max_pool, global_mean_pool, BatchNorm
+-from torch_geometric.nn import SAGPooling, Set2Set
++from torch_geometric.nn import SAGPooling as _SAGPooling
++
++class SAGPooling(_SAGPooling):
++    """Bridge PyG Sequential positional mapping to batch keyword."""
++    def forward(self, x, edge_index, batch):
++        return super().forward(x, edge_index, batch=batch)
++
+ 
+ class PolymerGNN_Tg(torch.nn.Module):
+     def __init__(self, input_feat, hidden_channels, num_additional = 0):
+@@ -15,7 +21,7 @@
+             (SAGEConv(hidden_channels, hidden_channels, aggr = 'max'), 'x, edge_index -> x'),
+             BatchNorm(hidden_channels, track_running_stats=False),
+             torch.nn.PReLU(),
+-            (SAGPooling(hidden_channels), 'x, edge_index, batch=batch -> x'),
++            (SAGPooling(hidden_channels), 'x, edge_index, batch -> x'),
+         ])
+ 
+         self.Gsage = Sequential('x, edge_index, batch', [
+@@ -25,7 +31,7 @@
+             (SAGEConv(hidden_channels, hidden_channels, aggr = 'max'), 'x, edge_index -> x'),
+             BatchNorm(hidden_channels, track_running_stats=False),
+             torch.nn.PReLU(),
+-            (SAGPooling(hidden_channels), 'x, edge_index, batch=batch -> x'),
++            (SAGPooling(hidden_channels), 'x, edge_index, batch -> x'),
+         ])
+ 
+         self.fc1 = torch.nn.Linear(hidden_channels * 2 + num_additional, hidden_channels)

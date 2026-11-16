@@ -1,0 +1,17 @@
+{
+  "baseline": {
+    "uuid": "6f4a6663b65940f1a2e3bb1488be9ee9",
+    "n": 28,
+    "median_tg_err_K": 194.93489837646484,
+    "max_tg_err_K": 318.8318786621094,
+    "min_tg_err_K": 128.3941879272461
+  },
+  "best": {
+    "uuid": "0e28fb4e541941899423ddc0ce3f0e48",
+    "n": 28,
+    "median_tg_err_K": 8.3509521484375,
+    "max_tg_err_K": 87.48681640625,
+    "min_tg_err_K": 0.1229248046875
+  },
+  "interpretation": "baseline 的 Tg 中位误差 ~195K 在 best 架构上降至个位数, 证实是 joint_test.py 的 Asage/Gsage 拷贝粘贴 bug 导致的真实、严重的 test 集泛化失败, 而非 sealed_test_eval.py 的 denormalization bug (IV 预测在同一 baseline checkpoint 上保持正常, 排除通用管线 bug)。"
+}

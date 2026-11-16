@@ -1,0 +1,142 @@
+{
+  "note": "read-only re-analysis of sealed R8 per-seed records; no re-evaluation performed",
+  "bootstrap": {
+    "n_boot": 20000,
+    "seed": 12345,
+    "method": "percentile, resampling seeds with replacement"
+  },
+  "tasks": {
+    "IV": {
+      "n_test_samples": 38,
+      "arms": {
+        "baseline": {
+          "n_seeds": 20,
+          "val_mean": 0.08617336787283421,
+          "val_median": 0.0851857140660286,
+          "test_mean": 0.20669849703771262,
+          "test_median": 0.16897549903522455,
+          "test_sd": 0.09648300708088851,
+          "pearson_val_test": 0.20855659934055687,
+          "spearman_val_test": 0.34285714285714286
+        },
+        "best": {
+          "n_seeds": 20,
+          "val_mean": 0.08330403622239828,
+          "val_median": 0.07487866282463074,
+          "test_mean": 0.3011881174345267,
+          "test_median": 0.22109374916098146,
+          "test_sd": 0.21293850478956058,
+          "pearson_val_test": 0.05772500760004633,
+          "spearman_val_test": 0.12330827067669173
+        }
+      },
+      "paired": {
+        "n_common_seeds": 20,
+        "pearson_dval_dtest": 0.07224225056583405,
+        "pearson_dval_dtest_bootstrap_ci95": [
+          -0.4303143757532943,
+          0.6829995427070329
+        ],
+        "pearson_dval_dtest_bootstrap_n_valid": 20000,
+        "spearman_dval_dtest": -0.016541353383458645,
+        "sign_agreement": 9,
+        "sign_agreement_rate": 0.45,
+        "mean_based_rel_change_pct": 45.713743327110045,
+        "median_based_rel_change_pct": 30.843672853951666,
+        "val_mean_rel_change_pct": -3.329719751315969,
+        "test_rel_change_leave_one_seed_out_range_pct": [
+          33.4170294930007,
+          50.409549001669355
+        ]
+      }
+    },
+    "Tg": {
+      "n_test_samples": 34,
+      "arms": {
+        "baseline": {
+          "n_seeds": 51,
+          "val_mean": 0.1072436872066236,
+          "val_median": 0.10243922472000122,
+          "test_mean": 0.25250169662393107,
+          "test_median": 0.2608894019770282,
+          "test_sd": 0.0572473601445089,
+          "pearson_val_test": 0.5461100557324478,
+          "spearman_val_test": 0.5777375565610859
+        },
+        "best": {
+          "n_seeds": 51,
+          "val_mean": 0.10387683331089861,
+          "val_median": 0.10238449275493622,
+          "test_mean": 0.24546990829660087,
+          "test_median": 0.23906137345205636,
+          "test_sd": 0.06213528028944475,
+          "pearson_val_test": 0.47836743043005175,
+          "spearman_val_test": 0.43085972850678733
+        }
+      },
+      "paired": {
+        "n_common_seeds": 51,
+        "pearson_dval_dtest": 0.40262452913192587,
+        "pearson_dval_dtest_bootstrap_ci95": [
+          0.10661489144431109,
+          0.6379264005783276
+        ],
+        "pearson_dval_dtest_bootstrap_n_valid": 20000,
+        "spearman_dval_dtest": 0.3574660633484163,
+        "sign_agreement": 35,
+        "sign_agreement_rate": 0.6862745098039216,
+        "mean_based_rel_change_pct": -2.784847952052833,
+        "median_based_rel_change_pct": -8.366774717393021,
+        "val_mean_rel_change_pct": -3.1394425009260956,
+        "test_rel_change_leave_one_seed_out_range_pct": [
+          -4.172264389052249,
+          -1.53409772202129
+        ]
+      }
+    },
+    "joint": {
+      "n_test_samples": 28,
+      "arms": {
+        "baseline": {
+          "n_seeds": 23,
+          "val_mean": 0.10900132196105045,
+          "val_median": 0.10589893907308578,
+          "test_mean": 18.769223225931867,
+          "test_median": 15.660251892900309,
+          "test_sd": 14.370666490094061,
+          "pearson_val_test": -0.2118891274455973,
+          "spearman_val_test": -0.0533596837944664
+        },
+        "best": {
+          "n_seeds": 23,
+          "val_mean": 0.092682137761427,
+          "val_median": 0.09251183271408081,
+          "test_mean": 0.1520063944993314,
+          "test_median": 0.1424970648825557,
+          "test_sd": 0.03252004791676624,
+          "pearson_val_test": 0.20584368548106013,
+          "spearman_val_test": 0.1808300395256917
+        }
+      },
+      "paired": {
+        "n_common_seeds": 23,
+        "pearson_dval_dtest": -0.17905578856292567,
+        "pearson_dval_dtest_bootstrap_ci95": [
+          -0.4574405892289807,
+          0.31254517468473586
+        ],
+        "pearson_dval_dtest_bootstrap_n_valid": 20000,
+        "spearman_dval_dtest": -0.13932806324110672,
+        "sign_agreement": 16,
+        "sign_agreement_rate": 0.6956521739130435,
+        "mean_based_rel_change_pct": -99.19012953988785,
+        "median_based_rel_change_pct": -99.09007169324552,
+        "val_mean_rel_change_pct": -14.971547047342042,
+        "test_rel_change_leave_one_seed_out_range_pct": [
+          -99.22252145972827,
+          -99.0453116265921
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "command": [
+    "/home/ymujdb/PolymerGNN-project/.envs/polymergnn/bin/python",
+    "/home/ymujdb/PolymerGNN-project/scripts/bounded_train.py",
+    "--task",
+    "joint",
+    "--epochs",
+    "2",
+    "--max-updates",
+    "8",
+    "--timeout-seconds",
+    "120",
+    "--batch-size",
+    "4",
+    "--learning-rate",
+    "0.0001",
+    "--protocol",
+    "/home/ymujdb/PolymerGNN-project/evidence/bounded_protocol/protocol.json",
+    "--output",
+    "/home/ymujdb/PolymerGNN-project/evidence/adapter_runs/bce8a54ac5cc4082a57e7f5fe51ebe39",
+    "--worker"
+  ],
+  "exit_code": 0,
+  "hard_timeout_seconds": 120.0
+}
