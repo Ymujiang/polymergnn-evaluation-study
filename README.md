@@ -72,6 +72,9 @@ records the commit of the evaluation harness that produced each task-arm block o
 Run from the repository root. The analyses write derived summaries into `evidence/`, so run them in a
 working copy rather than in the archived records you want to keep unchanged.
 
+The `scripts/*.py` files are mode 644 in the archive; invoke them as
+`python3 <script>` rather than as executables.
+
 ```
 python3 scripts/analyze_r8.py
 python3 scripts/analyze_multisplit.py
@@ -81,10 +84,12 @@ Several statistics modules execute their analysis on import. `scripts/analyze_ro
 `scripts/analyze_r13_val_test.py` write a summary file into `evidence/` when they run, so import them only to
 run them.
 
-Model training is not part of this package, so `scripts/evaluate_smoke.py` cannot run here: it calls the
-training entry point. The evaluation harness scores the checkpoints saved by the training runs, and each
-checkpoint's own metadata carries the standardization statistics those runs fit on their training split.
-The checkpoints are not archived either. The analyzer scripts, by contrast, read only the records in
+Model training is not part of this package: the training entry point, the upstream runtime it imports and
+the dataset it reads are all left out, for the reasons given under `Rebuilding the upstream runtime`. The
+evaluation harness (`sealed_test_eval.py`, `independent_score.py`, `validate_evaluation.py`) therefore cannot
+run here either, because it scores the checkpoints saved by the training runs, and the checkpoints are
+not archived. Each checkpoint's own metadata carries the standardization statistics its training
+run fitted on its training split. The analyzer scripts, by contrast, read only the records in
 `evidence/` and reproduce the reported statistics from them alone.
 
 Required packages: Python 3, NumPy and SciPy for the analyses, Matplotlib for the figures. The two
