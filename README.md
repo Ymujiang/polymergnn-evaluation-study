@@ -57,10 +57,11 @@ size and SHA-256). The held-out partition was evaluated once, so that record is 
 reported test statistics and cannot be regenerated.
 
 `evidence/r11_literature/` holds the literature-survey records: the corpus retrieved from the indexing services
-(`corpus_raw.json`), the per-paper bibliographic metadata and coding decisions (`extraction_nofulltext.json`,
-`extraction_v2_nofulltext.json`), the final coding table used for the reported proportions (`coding_table.json`),
-and the identifier lists for the full corpus and the polymer subset. The retrieved full texts are not
-distributed; the coding table records the bibliographic fields and the assigned category for each paper.
+(`corpus_raw.json`), the per-paper bibliographic metadata and coding decisions (`extraction.json`,
+`extraction_v2.json` and their `_nofulltext` variants), the final coding table used for the reported proportions
+(`coding_table.json`), and the identifier lists for the full corpus and the polymer subset. The retrieved full
+texts and the passages quoted from them are not distributed; the coding records keep the bibliographic fields
+and the assigned category for each paper.
 
 `evidence/DEPOSIT_MANIFEST.json` lists every file under `evidence/` with its size and SHA-256 so that the
 archived records can be verified without the dataset or the trained checkpoints. `evidence/multisplit/code_manifest.json`
